@@ -1,4 +1,6 @@
-# A laser cat toy based using a NodeMCU with the following features:
+# A laser cat toy using a NodeMCU.
+
+Includes the following features:
 
 Full smartphone control;
 Manual, Auto and Scheduled Modes;
