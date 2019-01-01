@@ -1,0 +1,69 @@
+
+
+body {  
+  background-image: url("Splash_Screen.jpg");
+  background-size: cover;
+  background-repeat: no-repeat, repeat;
+
+ background-color: ;
+  
+  
+ 
+}
+
+
+
+
+.container-fluid{  
+ top: 10%;
+  margin-left: 35%;
+}
+
+
+
+
+
+
+.pager {
+  position: absolute;
+ top: 0%;
+ left: 62%;
+  
+  font-family: arial;
+  justify-content: center;  
+  align-items: center;
+  
+  
+  font-size: 125%;
+  font-color: black;
+  padding: 10px 10px;
+
+   
+  opacity: 0.6;
+  cursor: pointer
+}
+
+.pager:hover {
+  background-color: #ffffe6;
+  color: black;
+  opacity: 0.9;
+  border-radius: 10%;
+}
+
+.home {
+position: absolute;
+ 
+  
+}
+
+.game {
+position: absolute;
+  top: 6%;
+ 
+}
+.setup {
+position: absolute;
+  top: 80%;
+  
+}
+

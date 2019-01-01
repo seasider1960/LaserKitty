@@ -1,0 +1,588 @@
+
+<!--
+/*LASER CAT TOY PROJECT.
+ 
+  SOME COMMON SENSE: CHOOSE YOUR LASER CAREFULLY AND TAKE STEPS TO ENSURE THAT YOUR CAT IS
+  NOT SUSCEPTIBLE TO STARING AT THE LASER ITSELF RATHER THAN THE DOT, ESPECIALLY IF YOU INTEND TO USE
+  THIS SOFTWARE IN SCHEDULED MODE.
+
+  SOME LEGAL MUMBO JUMBO: THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY OR FITNESS
+  FOR A PARTICULAR PURPOSE.  IT MAY OR MAY NOT WORK. IT MAY INFRINGE THE INTELLECTUAL PROPERTY RIGHTS OF OTHERS.
+  IT MAY CAUSE INJURY OR DEATH -- TO YOU, SOMEBODY ELSE OR, HEAVEN FORBID, YOUR CAT. YOU MIGHT LOSE SOME OR ALL
+  OF YOU MONEY BY USING THIS SOFTWARE AND/OR ANY ASSOCIATED HARDWARE. TO THE MAXIMUM EXTENT PERMITTED BY LAW, 
+  PLUS 15%, I WILL NOT DEFEND OR INDEMNIFY YOU OR ANYBODY ELSE FOR ANY OF THESE THINGS. OR ANYTHING ELSE.
+
+  ANY USE OF THIS SOFTWARE MEANS YOU HAVE AGREED TO ALL THAT.  SO THERE.
+
+
+-->
+
+
+<html charset="UTF-8">
+  <head>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="styles_Laser_Kitty_Play.css">
+    <link rel="apple-touch-icon" sizes="57x57" href="images/Mini_Icon57.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="images/Mini_Icon72.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="images/Mini_Icon144.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="images/Mini_Icon114.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="images/Mini_Icon180.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"> 
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+ 	
+<style>
+
+h1 {
+  color: black;
+  font-size: 150%;
+    position: absolute;
+    top: 240%;
+    left: 0%;
+  font-family: arial;
+  
+}
+h5 {
+  color: black;
+  font-size: 150%;
+    position: absolute;
+    top: 275%;
+    left: %;
+  font-family: arial;
+  
+}
+
+h2 {
+  color: white;
+  font-size: 350%;
+    position: absolute;
+    top: 30%;
+    left: 6%;
+  font-family: impact;
+  transform: skewY(20deg);
+}
+  
+}
+
+h3 {
+  color: black;
+  font-size: 250%;
+    position: absolute;
+    top: 238px;
+    left: 33%;
+  font-family: arial;
+  
+}
+
+img {
+  position: absolute;
+    top: 45px;
+    left: 1.2%;
+    transform: skewY(1.2deg); 
+    
+}
+</style>
+</head>
+<body>
+
+
+<div class="background">
+  <div class="container-fluid">
+    <div class="brick">
+      <div class="text-center">
+      <img src="Laser_Kitty.jpg" alt="LaserKitty!!">
+      <div class="led-box">
+      <div class="led-red"></div>
+    </div>
+      <div class="led-rgb" id="rgb" style="background-color:#ffffe6"></div> 
+    </div>         
+    <button class="btn servos" id="servos"  onclick="ServosOnOff();">WAIT!</button>
+    <button class="btn laser" id="laser"  onclick="LaserOnOff();">WAIT!</button>
+    <button class="btn sounds" id="sounds"  onclick="SoundsOnOff();">WAIT</button>
+    <form>
+      <label class="switch"><input type="checkbox" id="On"><div class="sliderS round" onclick="AutoMan();"></div></label> 
+    </form>
+    <form>
+      <input  type="range"  max="165" min="0" step="1"  class="slider pan" style="background-color:#999" id="p"  value="96">
+        <h1>Pan Angle: <span id="pv" class= "text-left panttext"></span>&#176</h1>
+        <input  type="range"  max="175" min="15" step="1" class="slider tilt" style="background-color:#999" id="t"  value="96" >
+        <h5>Tilt Angle: <span id="tv" class= "text-left tilttext"></span>&#176</h5>
+    </form>
+    <form>           
+      <button type="button" class="btn homeP" onclick="Home();">Home Position</button>
+      <button type="button" class="btn homesave" onclick="Save();">Save Current Position</button>
+    </form>
+    <form>           
+      <button type="button" class="btn schedule" id="schedule" onclick="ArmSchedule();">Arm Scheduled Mode</button>
+    </form>
+    <ul class="pager setup">
+      <li><a href="http://LaserKitty.local/page2">Set Up</a></li>
+    </ul>
+    </div>
+  </div>
+
+
+
+<script>
+var sliderP = document.getElementById("p");
+var outputP = document.getElementById("pv");
+outputP.innerHTML = sliderP.value;
+
+sliderP.oninput = function() {
+  outputP.innerHTML = this.value;
+  var p = document.getElementById('p').value;
+  var t = document.getElementById('t').value;
+  var pt = p << 10 | t;
+  var ptstr = '#' + pt.toString(16);
+  console.log('PanTilt: ' + ptstr);
+  if (Manual & ServosEnable) {
+  connection.send(ptstr);
+   }
+}
+
+var sliderT = document.getElementById("t");
+var outputT = document.getElementById("tv");
+outputT.innerHTML = sliderT.value;
+
+sliderT.oninput = function() {
+  outputT.innerHTML = this.value;
+   var p = document.getElementById('p').value;
+  var t = document.getElementById('t').value;
+  var pt = p << 10 | t;
+  var ptstr = '#' + pt.toString(16);
+  console.log('PanTilt: ' + ptstr);
+  if (Manual && ServosEnable) {
+  connection.send(ptstr);
+   }
+   
+}
+
+var ServosEnable = false;
+var Manual = true;
+var LaserEnable = false;
+var SoundsEnable = true;
+var ScheduleEnable = false;
+var HomePositionP = 96;
+var HomePositionT = 96;
+
+
+
+
+var connection = new WebSocket('ws://' + location.hostname + ':81/', ['arduino']);
+connection.onopen = function () {
+  connection.send('Connect ' + new Date());
+  
+  setTimeout(LaserStart, 4000);  // Mostly just to stop  user pressingbuttons before the page fully loads
+  setTimeout(ServosStart, 3000);
+  setTimeout(SoundsStart, 5000);
+};
+connection.onerror = function (error) {
+  console.log('WebSocket Error ', error);
+};
+connection.onmessage = function (e) {
+  console.log('Server: ', e.data);
+  if(e.data.slice(0,4)=="15:1") {
+    Manual = false;
+    document.getElementById('rgb').style.backgroundColor ='#ABFF00';
+    document.getElementById('On').checked = true;
+    document.getElementById('p').style.backgroundColor = '#999';
+    document.getElementById('t').style.backgroundColor = '#999';
+  }
+  if(e.data.slice(0,4)=="15:0") {
+    Manual = true;
+    document.getElementById('On').checked = false;
+    if (ServosEnable) {
+      document.getElementById('rgb').style.backgroundColor = '#F00';
+      document.getElementById('p').style.backgroundColor = '#004d66';
+      document.getElementById('t').style.backgroundColor = '#007399';
+    }
+  }
+  if(e.data.slice(0,4)=="12:1") {
+    ServosEnable = true;
+    document.getElementById('servos').style.backgroundColor = '#004d66';
+    document.getElementById('servos').style.color = 'white';
+    if (Manual && ! ScheduleEnable)  {
+      document.getElementById('p').style.backgroundColor = '#004d66';
+      document.getElementById('t').style.backgroundColor = '#007399';
+      document.getElementById('rgb').style.backgroundColor ='#F00';
+     }
+     else if (!Manual && !ScheduleEnable){
+      document.getElementById('rgb').style.backgroundColor ='#ABFF00';
+      document.getElementById('p').style.backgroundColor = '#999';
+      document.getElementById('t').style.backgroundColor = '#999';
+     }
+     else if (ScheduleEnable) {
+      document.getElementById('rgb').style.backgroundColor ='#24E0FF';
+      document.getElementById('p').style.backgroundColor = '#999';
+      document.getElementById('t').style.backgroundColor = '#999';
+     }
+  }
+  if(e.data.slice(0,4)=="12:0") {
+    ServosEnable = false;
+    Manual = true;
+    document.getElementById('On').checked = false;
+    document.getElementById('servos').style.backgroundColor = '#999';
+    document.getElementById('servos').style.color = 'black';
+    document.getElementById('rgb').style.backgroundColor ='#ffffe6';
+    document.getElementById('p').style.backgroundColor = '#999';
+    document.getElementById('t').style.backgroundColor = '#999';
+    if (ScheduleEnable) {
+    document.getElementById('rgb').style.backgroundColor ='#24E0FF';  
+    }
+    else {
+       document.getElementById('rgb').style.backgroundColor = '#ffffe6';  
+    }
+  }
+  if(e.data.slice(0,4)=="13:1") {
+    LaserEnable = true;
+    document.getElementById('laser').style.backgroundColor = '#ca2222';
+    document.getElementById('laser').style.color = 'white';
+  }
+  if(e.data.slice(0,4)=="13:0") {
+    LaserEnable = false;
+    document.getElementById('laser').style.backgroundColor = '#999';
+    document.getElementById('laser').style.color = 'black';
+  }
+  if(e.data.slice(0,4)=="14:1") {
+    SoundEnable = true;
+    document.getElementById('sounds').style.backgroundColor = '#004d66';
+    document.getElementById('sounds').style.color = 'white';
+  }
+  if(e.data.slice(0,4)=="14:0") {
+    SoundEnable = false;
+    document.getElementById('sounds').style.backgroundColor = '#999';
+    document.getElementById('sounds').style.color = 'black';
+  }
+   if(e.data.slice(0,4)=="16:1") {
+    var scheduleText = document.getElementById('schedule');
+    ScheduleEnable = true;
+    document.getElementById('schedule').style.backgroundColor = 'ca2222';
+    scheduleText.innerHTML =  'Scheduled Mode Armed';
+    document.getElementById('schedule').style.color = 'white';
+    document.getElementById('rgb').style.backgroundColor = '#24E0FF';
+  }
+  if(e.data.slice(0,4)=="16:0") {
+    var scheduleText = document.getElementById('schedule');
+    document.getElementById('schedule').style.backgroundColor = '#999';
+    scheduleText.innerHTML =  'Arm Scheduled Mode';
+    document.getElementById('schedule').style.color = 'black';
+    if (Manual && ServosEnable) { 
+      document.getElementById('rgb').style.backgroundColor ='#F00';
+      document.getElementById('p').style.backgroundColor = '#004d66';
+      document.getElementById('t').style.backgroundColor = '#007399';
+    }
+    else if (!Manual && ServosEnable)  {
+      document.getElementById('rgb').style.backgroundColor ='#ABFF00';
+      document.getElementById('p').style.backgroundColor = '#999';
+      document.getElementById('t').style.backgroundColor = '#999';
+    }
+    else {
+      document.getElementById('rgb').style.backgroundColor ='#ffffe6';
+    }
+  }
+
+  if (e.data.slice(0,3)=="17:") {
+    var sliderP = document.getElementById("p");
+    var outputP = document.getElementById("pv");
+    var pan = parseInt(e.data.slice(3), 10);
+    sliderP.value = pan;
+    outputP.innerHTML = sliderP.value;
+  }
+
+  if (e.data.slice(0,3)=="18:") {
+    var sliderT = document.getElementById("t");
+    var outputT = document.getElementById("tv");
+    var tilt = parseInt(e.data.slice(3), 10);
+    sliderT.value = tilt;
+    outputT.innerHTML = sliderT.value;
+  }
+};
+connection.onclose = function () {
+  console.log('WebSocket connection closed');
+};
+
+function sendPT () {
+  var p = document.getElementById('p').value;
+  var t = document.getElementById('t').value;
+  var pt = p << 10 | t;
+  var ptstr = '#' + pt.toString(16);
+  console.log('PanTilt: ' + ptstr);
+  connection.send(ptstr);
+}
+
+
+function AutoMan() {
+  Manual = !Manual;
+  if (Manual) {
+    document.getElementById('rgb').style.backgroundColor = '#F00';
+    if (ServosEnable) {
+      document.getElementById('p').style.backgroundColor = '#004d66';
+      document.getElementById('t').style.backgroundColor = '#007399';
+    }
+    connection.send("G"); 
+  } else {
+    document.getElementById('rgb').style.backgroundColor ='#ABFF00';
+    document.getElementById('p').style.backgroundColor = '#999';
+    document.getElementById('t').style.backgroundColor = '#999';
+    connection.send("H");
+  }
+}
+
+function ServosOnOff() {
+  ServosEnable = ! ServosEnable;
+  if (ServosEnable) {
+    document.getElementById('servos').style.backgroundColor = '#004d66';
+    document.getElementById('servos').style.color = 'white';
+    document.getElementById('rgb').style.backgroundColor ='#F00';
+    if (Manual && !ScheduleEnable)  {
+      document.getElementById('p').style.backgroundColor = '#004d66';
+      document.getElementById('t').style.backgroundColor = '#007399';
+      document.getElementById('rgb').style.backgroundColor ='#F00';
+    }
+    if (!Manual & !ScheduleEnable) {
+      document.getElementById('rgb').style.backgroundColor ='#ABFF00';
+      document.getElementById('p').style.backgroundColor = '#999';
+      document.getElementById('t').style.backgroundColor = '#999';
+    }
+   if (ScheduleEnable) {
+      document.getElementById('rgb').style.backgroundColor ='#24E0FF';
+      document.getElementById('p').style.backgroundColor = '#999';
+      document.getElementById('t').style.backgroundColor = '#999';
+    }
+    connection.send("A");
+  } 
+  else {
+    document.getElementById('servos').style.backgroundColor = '#999';
+    document.getElementById('servos').style.color = 'black';
+    Manual = true;
+    document.getElementById('On').checked = false;
+    document.getElementById('rgb').style.backgroundColor ='#ffffe6';
+    document.getElementById('p').style.backgroundColor = '#999';
+    document.getElementById('t').style.backgroundColor = '#999';
+    connection.send("B");
+  }
+}
+
+function LaserOnOff() {
+  LaserEnable = ! LaserEnable;
+  if (LaserEnable) {
+    document.getElementById('laser').style.backgroundColor = '#ca2222';
+    document.getElementById('laser').style.color = 'white';
+    connection.send("X");
+  } 
+  else {
+    document.getElementById('laser').style.backgroundColor = '#999';
+    document.getElementById('laser').style.color = 'black';
+    connection.send("D");
+  }
+}
+
+function LaserStart() {
+   var laserText = document.getElementById('laser');
+   if (!LaserEnable) {
+     laserText.innerHTML =  'Laser';
+     document.getElementById('laser').style.backgroundColor = '#999';
+     document.getElementById('laser').style.color = 'black';
+     connection.send("D");
+   }
+   else {
+    laserText.innerHTML =  'Laser';
+    document.getElementById('laser').style.backgroundColor = '#ca2222';
+    document.getElementById('laser').style.color = 'white';
+   }
+}
+
+function ServosStart() {
+   var servosText = document.getElementById('servos');
+   if (!ServosEnable && !ScheduleEnable) {
+     servosText.innerHTML =  'Servos';
+     document.getElementById('servos').style.backgroundColor = '#999';
+     document.getElementById('servos').style.color = 'black';
+     document.getElementById('rgb').style.backgroundColor ='#ffffe6';
+     connection.send("B");
+   }
+   else if (!ServosEnable && ScheduleEnable) {
+     servosText.innerHTML =  'Servos';
+     document.getElementById('servos').style.backgroundColor = '#999';
+     document.getElementById('servos').style.color = 'black';
+     document.getElementById('rgb').style.backgroundColor ='#24E0FF';
+     connection.send("B");
+   } 
+   else {
+    servosText.innerHTML =  'Servos';
+    document.getElementById('servos').style.backgroundColor = '#004d66';
+    document.getElementById('servos').style.color = 'white';
+    if (Manual && !ScheduleEnable)  {
+      document.getElementById('rgb').style.backgroundColor ='#F00';
+      document.getElementById('p').style.backgroundColor = '#004d66';
+      document.getElementById('t').style.backgroundColor = '#007399';
+    }
+    else if (!Manual && !ScheduleEnable){
+      document.getElementById('rgb').style.backgroundColor ='#ABFF00';
+      document.getElementById('p').style.backgroundColor = '#999';
+      document.getElementById('t').style.backgroundColor = '#999'; 
+    }
+    else {
+      document.getElementById('rgb').style.backgroundColor = '#24E0FF';
+    }  
+  }
+}
+
+function SoundsStart() {
+  var soundsText = document.getElementById('sounds');
+  if (!SoundsEnable) {
+    soundsText.innerHTML =  'Sounds';
+    document.getElementById('sounds').style.backgroundColor = '#999';
+    document.getElementById('sounds').style.color = 'black';
+    connection.send("f");
+  }
+  else {
+    var soundsText = document.getElementById('sounds');
+    soundsText.innerHTML =  'Sounds';
+    document.getElementById('sounds').style.backgroundColor = '#004d66';
+    document.getElementById('sounds').style.color = 'white';
+  }
+}
+
+
+function SoundsOnOff() {
+  SoundsEnable = ! SoundsEnable;
+  if (SoundsEnable) {
+    document.getElementById('sounds').style.backgroundColor = '#004d66';
+    document.getElementById('sounds').style.color = 'white';
+    connection.send("E");
+  } else {
+   document.getElementById('sounds').style.backgroundColor = '#999';
+   document.getElementById('sounds').style.color = 'black';
+   connection.send("f");
+  }
+}
+
+function ArmSchedule() {
+  ScheduleEnable = ! ScheduleEnable;
+  var scheduleText = document.getElementById('schedule');
+  if (ScheduleEnable) {
+    document.getElementById('schedule').style.backgroundColor = 'ca2222';
+    scheduleText.innerHTML =  'Scheduled Mode Armed';
+    document.getElementById('schedule').style.color = 'white';
+    document.getElementById('rgb').style.backgroundColor = '#24E0FF';
+    connection.send("I");
+  } 
+  else {
+    document.getElementById('schedule').style.backgroundColor = '#999';
+    scheduleText.innerHTML =  'Arm Scheduled Mode';
+    document.getElementById('schedule').style.color = 'black';
+    if (Manual && ServosEnable) {
+      document.getElementById('rgb').style.backgroundColor ='#F00';
+      document.getElementById('p').style.backgroundColor = '#004d66';
+      document.getElementById('t').style.backgroundColor = '#007399';
+      connection.send("G");
+   }
+   else if (!Manual && ServosEnable)  {
+      document.getElementById('rgb').style.backgroundColor ='#ABFF00';
+      document.getElementById('p').style.backgroundColor = '#999';
+      document.getElementById('t').style.backgroundColor = '#999';
+      connection.send("H");
+   } 
+   else {
+    document.getElementById('rgb').style.backgroundColor ='#ffffe6';
+    connection.send("W");
+    }
+  }
+}
+
+function sendDuration () {
+  var p = document.getElementById('duration').value;
+  var pstr = 'J' +  p.toString(8); 
+  console.log('Duration: ' + pstr);
+  connection.send(pstr); 
+}
+
+function sendFrequency () {
+  var p = document.getElementById('frequency').value;
+  var pstr = 'K' +  p.toString(8); 
+  console.log('Period: ' + pstr);
+  connection.send(pstr);  
+}
+
+function sendSchedOn () {
+  var p = document.getElementById('schedOn').value;
+  var pstr = 'L' +  p.toString(8); 
+  console.log('ScheduleOn: ' + pstr);
+  connection.send(pstr);  
+}
+
+function sendSchedOff () {
+  var p = document.getElementById('schedOff').value;
+  var pstr = 'M' +  p.toString(8); 
+  console.log('SscheduleOff: ' + pstr);
+  connection.send(pstr);  
+}
+
+function sendTZ () {
+  var p = document.getElementById('timezone').value;
+  var pstr = 'N' +  p.toString(8); 
+  console.log('Timezone: ' + pstr);
+  connection.send(pstr); 
+}
+
+function sendPanMin () {
+  var p = document.getElementById('PanMin').value;
+  var pstr = 'P' +  p.toString(8); 
+  console.log('PanMax: ' + pstr);
+  connection.send(pstr); 
+}
+
+function sendPanMax () {
+  var p = document.getElementById('PanMax').value;
+  var pstr = 'Q' +  p.toString(8); 
+  console.log('PanMax: ' + pstr);
+  connection.send(pstr);  
+}
+
+function sendTiltMin () {
+  var p = document.getElementById('TiltMin').value;
+  var pstr = 'R' +  p.toString(8); 
+  console.log('PanMax: ' + pstr);
+  connection.send(pstr); 
+}
+
+function sendTiltMax () {
+  var p = document.getElementById('TiltMax').value;
+  var pstr = 'S' +  p.toString(8); 
+  console.log('TiltMax: ' + pstr);
+    connection.send(pstr);
+    
+}
+
+function SoundOn() {
+  SoundEnable = ! SoundEnable;
+  if (SoundEnable) {
+    connection.send("E");
+  } 
+  else {
+    connection.send("F");
+  }
+}
+
+function Home() {
+  sliderP.value = HomePositionP
+  sliderT.value = HomePositionT
+  connection.send("Y");
+}
+
+function Save() {
+  HomePositionP = document.getElementById('p').value;
+  HomePositionT = document.getElementById('t').value;
+  connection.send("Z"); 
+}
+
+</script>
+</body>
+</html>
+
+
+  

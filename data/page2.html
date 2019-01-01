@@ -1,0 +1,424 @@
+
+<!--
+  SOME COMMON SENSE: CHOOSE YOUR LASER CAREFULLY AND TAKE STEPS TO ENSURE THAT YOUR CAT IS
+  NOT SUSCEPTIBLE TO STARING AT THE LASER ITSELF RATHER THAN THE DOT, ESPECIALLY IF YOU INTEND TO USE
+  THIS SOFTWARE IN SCHEDULED MODE.
+
+  SOME LEGAL MUMBO JUMBO: THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY OR FITNESS
+  FOR A PARTICULAR PURPOSE.  IT MAY OR MAY NOT WORK. IT MAY INFRINGE THE INTELLECTUAL PROPERTY RIGHTS OF OTHERS.
+  IT MAY CAUSE INJURY OR DEATH -- TO YOU, SOMEBODY ELSE OR, HEAVEN FORBID, YOUR CAT. YOU MIGHT LOSE SOME OR ALL
+  OF YOU MONEY BY USING THIS SOFTWARE AND/OR ANY ASSOCIATED HARDWARE. TO THE MAXIMUM EXTENT PERMITTED BY LAW, 
+  PLUS 15%, I WILL NOT DEFEND OR INDEMNIFY YOU OR ANYBODY ELSE FOR ANY OF THESE THINGS. OR ANYTHING ELSE.
+
+  ANY USE OF THIS SOFTWARE MEANS YOU HAVE AGREED TO ALL THAT.  SO THERE.
+
+
+-->
+
+
+<html charset="UTF-8">
+  <head>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+   
+   </head>
+
+
+   
+    <body>
+    <style>
+   .container-fluid {
+    margin-left: 5%;
+    margin-right: 2%;
+   }
+
+    <p style="color:red">
+    </style>
+
+    <div class="container-fluid">
+      <div class="row">
+       <h3 class="text-center" style="color:red">SAFETY NOTE </h3> 
+         <p style="color:red"> LASERKITTY!! IS NOT A TOY! WELL, OK IT IS A TOY, BUT THAT DOESN'T MEAN YOU SHOULD LEAVE COMMON SENSE AT THE DOOR WHEN USING IT.  THE LASER IS VERY LOW POWERED BUT YOU SHOULD NOT INTENTIONALLY POINT IT IN YOUR OR ANYBODY ELSE'S EYES. AND CERTAINLY NOT IN YOUR KITTY'S EYES. DO NOT USE LASERKITTY!! IF YOUR KITTY HAS ANY PROPENSITY TO STARE AT THE LASER ITSELF RATHER THAN THE DOT. DO NOT USE THE SCHEDULED MODE UNTIL YOU HAVE OBSERVED YOUR KITTY'S BEHAVIOR WHEN IN MANUAL AND AUTO MODES.  </p>
+         <p> LASERKITTY!! has a notification feature so that you will receive a notification when a scheduled play session begins. Used in conjunction with a kitty monitoring camera (not included with LASERKITTY!!), this feature allows you to observe your kitty's interaction with LASERKITTY!! when you are not around.
+         <p> Some interweb splother suggests laser toys can frustrate your kitty because they can never "catch" the dot.  LASERKITTY!! probably does not help in this regard by playing the "Mission Impossible" theme before each play session. This is especially harmful to kitties with a poorly developed sense of irony. More helpfully, LASERKITTY!! has a configurable "Home Position" to which the laser dot should return after an Auto or Scheduled Mode play session has concluded.  The Home Position should point to a stationary toy or a food bowl.</p>
+       <div class="col-lg">
+        <h2 class="text-center">SET UP</h2>
+       </div>
+      </div>
+      <hr>
+      <h3 class="text-center">Range Restrictions</h3> 
+        <div class="text-center">
+        <p><b><i>NOTE: Range restrictions apply when in Auto and Scheduled modes only.</i></b></p>
+      <hr>
+        <form >
+          <select id="PanMin" onchange="sendPanMin();">
+            <option value="0">Select Minimum Pan</option>
+            <option value="0">0&#176</option>
+            <option value="5">5&#176</option>
+            <option value="10">10&#176</option>
+            <option value="15">15&#176</option>
+            <option value="20">20&#176</option>
+            <option value="25">25&#176</option>
+            <option value="30">30&#176</option>
+            <option value="35">35&#176</option>
+            <option value="40">40&#176</option>
+            <option value="45">45&#176</option>
+            <option value="50">50&#176</option>
+            <option value="55">55&#176</option>
+            <option value="60">60&#176</option>
+            <option value="65">65&#176</option>
+            <option value="70">70&#176</option>
+            <option value="75">75&#176</option>
+            <option value="80">80&#176</option>
+            <option value="85">85&#176</option>
+            <option value="90">90&#176</option>
+            <option value="95">95&#176</option>
+            <option value="100">100&#176</option>
+            <option value="105">105&#176</option>
+            <option value="110">110&#176</option>
+            <option value="115">115&#176</option>
+          </select>
+        </form>
+        <button  class="btn panMin" id = "PMinBtn">Current minimum pan is: </button>
+         <hr>
+        <form style="text-align: center">
+          <select id="PanMax" onchange="sendPanMax();">
+            <option value="120">Select Maximum Pan</option>
+            <option value="120">120&#176</option>
+            <option value="125">125&#176</option>
+            <option value="130">130&#176</option>
+            <option value="135">135&#176</option>
+            <option value="140">140&#176</option>
+            <option value="145">145&#176</option>
+            <option value="150">150&#176</option>
+            <option value="155">155&#176</option>
+            <option value="160">160&#176</option>
+            <option value="165">165&#176</option>
+          </select>
+        </form>
+        <button class="btn panMax" id = "PMaxBtn">Current maximum pan is: </button>
+        <hr>
+        <form style="text-align: center">
+          <select id="TiltMin" onchange="sendTiltMin();">
+            <option value="5">Select Minimum Tilt</option>
+            <option value="5">5&#176</option>
+            <option value="10">10&#176</option>
+            <option value="15">15&#176</option>
+            <option value="20">20&#176</option>
+            <option value="25">25&#176</option>
+            <option value="30">30&#176</option>
+            <option value="35">35&#176</option>
+            <option value="40">40&#176</option>
+            <option value="45">45&#176</option>
+            <option value="50">50&#176</option>
+            <option value="55">55&#176</option>
+            <option value="60">60&#176</option>
+            <option value="65">65&#176</option>
+            <option value="70">70&#176</option>
+            <option value="75">75&#176</option>
+            <option value="80">80&#176</option>
+            <option value="85">85&#176</option>
+            <option value="90">90&#176</option>
+            <option value="95">95&#176</option>
+            <option value="100">100&#176</option>
+            <option value="105">105&#176</option>
+            <option value="110">110&#176</option>
+            <option value="115">115&#176</option>
+            <option value="120">120&#176</option>
+            <option value="125">125&#176</option>
+            <option value="130">130&#176</option>
+            <option value="135">135&#176</option>
+            <option value="140">140&#176</option>
+            <option value="145">145&#176</option>
+            <option value="150">150&#176</option>
+          </select>
+        </form>
+        <button  class="btn tiltMin" id = "TMinBtn">Current minimum tilt is: </button>
+        <p><b><i>NOTE: A HIGHER minimum tilt angle will keep the laser dot on the floor.</i></b></p>
+         <hr>
+        <form style="text-align: center">
+          <select id="TiltMax" onchange="sendTiltMax();">
+            <option value="155">Select Maximum Tilt</option>
+            <option value="155">155&#176</option>
+            <option value="160">160&#176</option>
+            <option value="165">165&#176</option>
+            <option value="170">170&#176</option>
+            <option value="175">175&#176</option> 
+          </select>
+        </form> 
+        <p><b><i>NOTE: A LOWER maximum tilt angle will keep the laser's immediate surroundings (including its own enclosure) from interferring with the laser beam.</i></b></p>          
+      <button  class="btn tiltMax" id = "TMaxBtn">Current maximum tilt is: </button> 
+      <hr>
+        <h3 class="text-center">Scheduled Operation</h3>
+      <hr>
+      <form style="text-align: center">
+        <select id="duration" onchange="sendDuration();">
+          <option value="0">On-Time Duration</option>
+          <option value="1">1 Minute</option>
+          <option value="2">2 Minutes</option>
+          <option value="3">3 Minutes</option>
+          <option value="4">4 Minutes</option>
+          <option value="5">5 Minutes</option>
+          <option value="6">6 Minutes</option>
+          <option value="7">7 Minutes</option>
+          <option value="8">8 Minutes</option>
+          <option value="9">9 Minutes</option>
+          <option value="10">10 Minutes</option>
+        </select>
+      </form>
+      <button class="btn duration" id = "durationBtn">Current play duration is: </button>
+      <hr>
+      <form style="text-align: center">
+        <select id="frequency" onchange="sendFrequency();">
+          <option value="0">On-Time Frequency</option>
+          <option value="30">Every 30 Minutes</option>
+          <option value="60">Every Hour</option>
+          <option value="90">Every 90 Minutes</option>
+          <option value="120">Every Two Hours</option>
+          <option value="180">Every Three Hours</option>
+        </select>
+      </form>
+      <button class="btn frequency" id = "frequencyBtn">Current play frequency is every: </button>  
+      <hr>
+      <form style="text-align: center">
+        <select id="schedOn" onchange="sendSchedOn();">
+          <option value="">Schedule Start</option>
+          <option value="0">Midnight</option>
+          <option value="1">1:00 AM</option>
+          <option value="2">2:00 AM</option>
+          <option value="3">3:00 AM</option>
+          <option value="4">4:00 AM</option>
+          <option value="5">5:00 AM</option>
+          <option value="6">6:00 AM</option>
+          <option value="7">7:00 AM</option>
+          <option value="8">8:00 AM</option>
+          <option value="9">9:00 AM</option>
+          <option value="10">10:00 AM</option>
+          <option value="11">11:00 AM</option>
+          <option value="12">Noon</option>
+          <option value="13">1:00 PM</option>
+          <option value="14">2:00 PM</option>
+          <option value="15">3:00 PM</option>
+          <option value="16">4:00 PM</option>
+          <option value="17">5:00 PM</option>
+          <option value="18">6:00 PM</option>
+          <option value="19">7:00 PM</option>
+          <option value="20">8:00 PM</option>
+          <option value="21">9:00 PM</option>
+          <option value="22">10:00 PM</option>
+          <option value="23">11:00 PM</option>
+        </select>
+      </form>
+      <button class="btn onHour" id = "onHour">Current play window start hour is: </button>  
+      <hr>
+      <form style="text-align: center">
+        <select id="schedOff" onchange="sendSchedOff();">
+          <option value="">Schedule Stop</option>
+          <option value="0">Midnight</option>
+          <option value="1">1:00 AM</option>
+          <option value="2">2:00 AM</option>
+          <option value="3">3:00 AM</option>
+          <option value="4">4:00 AM</option>
+          <option value="5">5:00 AM</option>
+          <option value="6">6:00 AM</option>
+          <option value="7">7:00 AM</option>
+          <option value="8">8:00 AM</option>
+          <option value="9">9:00 AM</option>
+          <option value="10">10:00 AM</option>
+          <option value="11">11:00 AM</option>
+          <option value="12">Noon</option>
+          <option value="13">1:00 PM</option>
+          <option value="14">2:00 PM</option>
+          <option value="15">3:00 PM</option>
+          <option value="16">4:00 PM</option>
+          <option value="17">5:00 PM</option>
+          <option value="18">6:00 PM</option>
+          <option value="19">7:00 PM</option>
+          <option value="20">8:00 PM</option>
+          <option value="21">9:00 PM</option>
+          <option value="22">10:00 PM</option>
+          <option value="23">11:00 PM</option>
+        </select>
+      </form>    
+     <button class="btn offHour" id = "offHour">Current play window stop hour is: </button>  
+     <hr>     
+        <h3 class="text-center">Set Time Zone</h3>  
+        <hr>   
+        <form style="text-align: center">
+          <select id="timezone" onchange="sendTZ();">
+            <option value="0">Select Time Zone</option>
+            <option value="-12">UCT-12</option>
+            <option value="-11">UCT-11</option>
+            <option value="-10">UCT-10</option>
+            <option value="-9">UCT-9</option>
+            <option value="-8">UCT-8</option>
+            <option value="-7">UCT-7</option>
+            <option value="-6">UCT-6</option>
+            <option value="-5">UCT-5 (Ridgefield, CT Standard)</option>
+            <option value="-4">UCT-4 (Ridgefield, CT DST)</option>
+            <option value="-3">UCT-3 </option>
+            <option value="-2">UCT-2</option>
+            <option value="-1">UCT-1 </option>
+            <option value="0">UCT </option>
+            <option value="1">UCT+1 </option>
+            <option value="2">UCT=2</option>
+            <option value="3">UCT+3</option>
+            <option value="4">UCT+4 </option>
+            <option value="5">UCT+5</option>
+            <option value="6">UCT+6</option>
+            <option value="7">UCT+7</option>
+            <option value="8">UCT+8</option>
+            <option value="9">UCT+9 </option>
+            <option value="10">UCT+10</option>
+            <option value="11">UCT+11</option>
+            <option value="12">UCT+12</option> 
+          </select>
+        </form>  
+        <button class="btn tz" id = "TZ">Time Zone set to: </button> 
+        <hr> 
+        <button class="btn hpPan" id = "hpPan">Home Position pan position is: </button> 
+        <button class="btn hpTilt" id = "hpTilt">Home Position tilt position is: </button> 
+        <hr>
+        <form style="text-align: center">
+          <h3 class="text-center">Pushbullet Messages</h3> 
+          <div class="row">
+          <label class="radio-inline"><input type="radio" name="optradio" id="messageOn" value="" checked="checked" onclick="MessageOn();">Messaging Enabled</label>
+          <label class="radio-inline"><input type="radio" name="optradio" id="messageOff" onclick="MessageOff();">Messaging Disabled</label>
+        </form> 
+      </div>
+      <hr> 
+      <ul class="pager">
+        <li><a href="http://LaserKitty.local/page1" >Let's Play!</a></li>
+      </ul>
+
+
+<script>
+
+var connection = new WebSocket('ws://' + location.hostname + ':81/', ['arduino']);
+connection.onopen = function () {
+  connection.send('Connect ' + new Date());
+};
+connection.onerror = function (error) {
+  console.log('WebSocket Error ', error);
+};
+connection.onmessage = function (e) {
+  console.log('Server: ', e.data);
+  var pMinText = document.getElementById('PMinBtn');
+  var pMaxText = document.getElementById('PMaxBtn');
+  var tMinText = document.getElementById('TMinBtn');
+  var tMaxText = document.getElementById('TMaxBtn');
+  var hpPanText = document.getElementById('hpPan');
+  var hpTiltText = document.getElementById('hpTilt');
+  var durationText = document.getElementById('durationBtn');
+  var frequencyText = document.getElementById('frequencyBtn');
+  var onHourText = document.getElementById('onHour');
+  var offHourText = document.getElementById('offHour');
+  var tZText = document.getElementById('TZ');
+  if(e.data.slice(0,2)=="1:") pMinText.innerHTML = 'Current minimum pan is: ' + e.data.slice(2) + '&#176';
+  if(e.data.slice(0,2)=="2:") pMaxText.innerHTML = 'Current maximum pan is: ' + e.data.slice(2) + '&#176';
+  if(e.data.slice(0,2)=="3:") tMinText.innerHTML = 'Current minimum tilt is: ' + e.data.slice(2) + '&#176';
+  if(e.data.slice(0,2)=="4:") tMaxText.innerHTML = 'Current maximum tilt is: ' + e.data.slice(2) + '&#176';
+  if(e.data.slice(0,2)=="5:") hpPanText.innerHTML = 'Home Position pan position is: ' + e.data.slice(2) + '&#176';
+  if(e.data.slice(0,2)=="6:") hpTiltText.innerHTML = 'Home Position tilt position is: ' + e.data.slice(2) + '&#176';
+  if(e.data.slice(0,2)=="7:") tZText.innerHTML = 'Time Zone set to: ' + e.data.slice(2) + ' vs UCT';
+  if(e.data.slice(0,2)=="8:") onHourText.innerHTML = 'Current play window start hour (24HR time) is: ' + e.data.slice(2) + ':00';
+  if(e.data.slice(0,2)=="9:") offHourText.innerHTML = 'Current play window stop hour (24HR time) is: ' + e.data.slice(2) + ':00';
+  if(e.data.slice(0,3)=="11:") frequencyText.innerHTML = 'Current play frequency is every: ' + e.data.slice(3) + ' minutes';
+  if(e.data.slice(0,3)=="10:") {
+  if (e.data.slice(3)=="1") {
+    durationText.innerHTML = 'Current play duration is: ' + e.data.slice(3) + ' minute'
+    }
+  else {
+    durationText.innerHTML = 'Current play duration is: ' + e.data.slice(3) + ' minutes'
+    }
+  }
+  if(e.data.slice(0,4)=="19:1") {
+    document.getElementById('messageOn').checked = true;
+  }
+  if(e.data.slice(0,4)=="19:0") {
+    document.getElementById('messageOff').checked = true;
+  }
+};
+  
+  connection.onclose = function () {
+  console.log('WebSocket connection closed');
+};
+
+function sendDuration () {
+  var p = document.getElementById('duration').value;
+  var pstr = 'J' +  p.toString(8); 
+  console.log('Duration: ' + pstr);
+  connection.send(pstr); 
+}
+
+function sendFrequency () {
+  var p = document.getElementById('frequency').value;
+  var pstr = 'K' +  p.toString(8); 
+  console.log('Frequency: ' + pstr);
+  connection.send(pstr);
+}
+
+function sendSchedOn () {
+  var p = document.getElementById('schedOn').value;
+  var pstr = 'L' +  p.toString(8); 
+  console.log('ScheduleOn: ' + pstr);
+  connection.send(pstr); 
+}
+
+function sendSchedOff () {
+  var p = document.getElementById('schedOff').value;
+  var pstr = 'M' +  p.toString(8); 
+  console.log('ScheduleOff: ' + pstr);
+  connection.send(pstr);
+}
+
+function sendTZ () {
+  var p = document.getElementById('timezone').value;
+  var pstr = 'N' +  p.toString(8); 
+  console.log('Timezone: ' + pstr);
+  connection.send(pstr); 
+}
+
+
+function sendPanMin () {
+  var p = document.getElementById('PanMin').value;
+  var pstr = 'P' +  p.toString(8); 
+  console.log('PanMin: ' + pstr);
+  connection.send(pstr);  
+}
+
+function sendPanMax () {
+  var p = document.getElementById('PanMax').value;
+  var pstr = 'Q' +  p.toString(8); 
+  console.log('PanMax: ' + pstr);
+  connection.send(pstr); 
+}
+
+function sendTiltMin () {
+  var p = document.getElementById('TiltMin').value;
+  var pstr = 'R' +  p.toString(8); 
+  console.log('TiltMin: ' + pstr);
+  connection.send(pstr); 
+}
+
+function sendTiltMax () {
+  var p = document.getElementById('TiltMax').value;
+  var pstr = 'S' +  p.toString(8); 
+  console.log('TiltMax: ' + pstr);
+  connection.send(pstr); 
+}
+
+function MessageOff() {
+  connection.send("n");
+}
+
+function MessageOn() {
+  connection.send("m");
+}
+
+</script>
+</body>  
+</html>
