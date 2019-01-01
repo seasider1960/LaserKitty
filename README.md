@@ -16,4 +16,4 @@ Configurable Home Position so playtime ends at food bowl or stationary toy;
 All settings stored in EEPROM so not lost on power outage;
 
 See a video of it in action at: https://www.youtube.com/watch?v=KX-o2tqmdH0&t=10s;
-An Instructables covering the project is at [TBA];
+An Instructables covering the project is at [TBA].
